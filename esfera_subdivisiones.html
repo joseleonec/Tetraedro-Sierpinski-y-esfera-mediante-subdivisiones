@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LEON JOSE - Esfera</title>
+    <script src="https://threejs.org/build/three.js"></script>
+</head>
+
+<body>
+
+    <h1>Obtencion de esfera mediante Subdivisiones</h1>
+    <label> <b> Aumentar la profundidad de las subdivisiones </b>
+        <input readonly value="0" id=demoInput type=number min=0 max=100>
+        <button id="up" onclick="increment()">+</button>    
+        <button id="down" onclick="decrement()">-</button>
+    </label>
+    <br>
+    <script>
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xffffff)
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        function dibujar() {
+            depth = parseInt(document.getElementById('demoInput').value);
+            var geometry;
+            var material;
+            var octahedron;
+            scene.clear();
+            depth = parseInt(document.getElementById('demoInput').value);
+            geometry = new THREE.OctahedronGeometry(1, depth); 
+            material = new THREE.MeshBasicMaterial({
+                color: 0xff0000,
+                wireframe: true,
+                wireframeLinecap: "square"
+            });
+            octahedron = new THREE.Mesh(geometry, material);
+            scene.add(octahedron);
+            camera.position.z = 3;
+            const animate = function () {
+                requestAnimationFrame(animate);
+
+                // octahedron.rotation.x += 0.01;
+                octahedron.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+            };
+            animate();
+        }
+        dibujar()
+        function increment() {
+            document.getElementById('demoInput').stepUp();
+            dibujar();
+        }
+        function decrement() {
+            document.getElementById('demoInput').stepDown();
+            dibujar();
+        }
+
+    </script>
+
+</body>
+
+</html>

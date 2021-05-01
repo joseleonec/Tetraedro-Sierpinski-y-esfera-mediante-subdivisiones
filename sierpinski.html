@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>LEON JOSE - Sierpinski Tetrahedron</title>
+  <script src="matrix4x4.js"></script>
+  <script src="sierpinski.js"></script>
+  <script>
+    window.onload = function () {
+      // All of the action is in the startSierpinski function.
+      startSierpinski(document.getElementById("sierpinski"), 1);
+    };
+  </script>
+
+</head>
+
+<body>
+  <h1>Tetraedro Sierpinski WebGL</h1>
+  <label> <b> Aumentar la profundidad de las subdivisiones </b>
+    <input readonly value="1" id=demoInput type=number min=1 max=100>
+    <button id="up" onclick="increment()">+</button>
+    <button id="down" onclick="decrement()">-</button>
+  </label>
+  <br>
+  <h1>USE EL MOUSE PARA ROTAR LA FIGURA</h1>
+
+  <canvas id="sierpinski" width="512" height="512">
+    Your web browser does not support the
+    <code>canvas</code> element! Sorry.
+  </canvas>
+
+</body>
+
+</html>
